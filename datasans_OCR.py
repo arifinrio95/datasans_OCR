@@ -14,8 +14,8 @@ def ocr_image(image):
 
 def ocr_analyze(ocr_output):
     messages = [
-        {"role": "system", "content": "Aku akan menganalisis output dari OCR kamu."},
-        {"role": "user", "content": f"""Pertama rapikan text dari hasil OCR saya yang berantakan. Kedua, analisa hasil dari OCR secara insightful. Output OCR:  {ocr_output}."""}
+        {"role": "system", "content": "Aku akan menganalisis data kamu."},
+        {"role": "user", "content": f"""Pertama, rapikan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Kedua, analisa data tersebut secara insightful. Output OCR:  {ocr_output}."""}
     ]
 
     response = openai.ChatCompletion.create(
@@ -50,7 +50,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
-    st.write("Mengklasifikasi...")
+    # st.write("Mengklasifikasi...")
 
     if st.button('Lakukan OCR'):
         ocr_result = ocr_image(image)
