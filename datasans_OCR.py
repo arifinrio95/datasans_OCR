@@ -9,6 +9,22 @@ def ocr_image(image):
     # Melakukan OCR pada gambar
     return pytesseract.image_to_string(image)
 
+def ocr_analyze(ocr_output):
+    messages = [
+        {"role": "system", "content": "Aku akan menganalisis output dari OCR kamu."},
+        {"role": "user", "content": f"""Pertama rapikan text dari hasil OCR saya yang berantakan. Kedua, analisa hasil dari OCR secara insightful. Output OCR:  {ocr_output}."""}
+    ]
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-16k",
+        messages=messages,
+        max_tokens=10000,
+        temperature=0
+    )
+    script = response.choices[0].message['content']
+
+    return script
+    
 def save_file(text, output_format='docx'):
     # Menyimpan hasil dalam format yang diinginkan
     if output_format == 'docx':
@@ -36,7 +52,8 @@ if uploaded_file is not None:
     if st.button('Lakukan OCR'):
         ocr_result = ocr_image(image)
         st.subheader("Hasil OCR:")
-        st.write(ocr_result)
+        # st.write(ocr_result)
+        st.write(ocr_analyze(ocr_result))
 
         format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
         if st.button('Download Hasil'):
