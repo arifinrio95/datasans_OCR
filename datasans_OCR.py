@@ -29,19 +29,19 @@ def ocr_analyze(ocr_output):
     return script
     
 def save_file(text, output_format='docx'):
-    # Menyimpan hasil dalam format yang diinginkan
+    # Membuat nama file yang unik
+    unique_filename = str(uuid.uuid4())
     if output_format == 'docx':
+        file_path = os.path.join(os.getcwd(), f"{unique_filename}.docx")
         document = Document()
         document.add_paragraph(text)
-        fp_name = tempfile.mktemp(suffix='.docx')
-        document.save(fp_name)
-        return fp_name
+        document.save(file_path)
     elif output_format == 'pdf':
-        fp_name = tempfile.mktemp(suffix='.pdf')
-        c = canvas.Canvas(fp_name)
+        file_path = os.path.join(os.getcwd(), f"{unique_filename}.pdf")
+        c = canvas.Canvas(file_path)
         c.drawString(100, 750, text)
         c.save()
-        return fp_name
+    return file_path
 
 st.title('Datasans OCR App')
 st.write("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata telajang.")
@@ -64,5 +64,5 @@ if uploaded_file is not None:
         format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
         if st.button('Download Hasil'):
             output_path = save_file(ocr_result_gpt, format_option)
-            st.success(f'File siap diunduh dalam format {format_option}')
-            st.download_button(label=f"Download {format_option.upper()}", file_path=output_path, file_name=f"output.{format_option}")
+            href = f'<a href="file://{output_path}" download>Click here to download {format_option.upper()}</a>'
+            st.markdown(href, unsafe_allow_html=True)
