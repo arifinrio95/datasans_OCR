@@ -8,6 +8,9 @@ import tempfile
 
 openai.api_key = st.secrets['user_api']
 
+st.set_option('deprecation.showPyplotGlobalUse', False)
+st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0MD5S4LK', use_column_width=True)
+
 def ocr_image(image):
     # Melakukan OCR pada gambar
     return pytesseract.image_to_string(image)
