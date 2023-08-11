@@ -56,19 +56,19 @@ if uploaded_file is not None:
 
     if st.button('Lakukan OCR'):
         # Tampilkan URL Saweria setelah OCR
-        st.markdown(
-            """<iframe src="https://saweria.co/widgets/qr?streamKey=0069192f5795ea2a865affcdc39e6f51" 
-                width="200" height="200" frameborder="0" scrolling="no"></iframe>""",
-            unsafe_allow_html=True,
-        )
-        ocr_result = ocr_image(image)
+        # st.markdown(
+        #     """<iframe src="https://saweria.co/widgets/qr?streamKey=0069192f5795ea2a865affcdc39e6f51" 
+        #         width="200" height="200" frameborder="0" scrolling="no"></iframe>""",
+        #     unsafe_allow_html=True,
+        # )
+        # ocr_result = ocr_image(image)
         st.subheader("Hasil OCR:")
         # st.write(ocr_result)
         ocr_result_gpt = ocr_analyze(ocr_result)
         st.write(ocr_result_gpt)
 
         format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
-        if st.button('Download Hasil'):
-            output_path = save_file(ocr_result_gpt, format_option)
-            href = f'<a href="file://{output_path}" download>Click here to download {format_option.upper()}</a>'
-            st.markdown(href, unsafe_allow_html=True)
+        # if st.button('Download Hasil'):
+        #     output_path = save_file(ocr_result_gpt, format_option)
+        #     href = f'<a href="file://{output_path}" download>Click here to download {format_option.upper()}</a>'
+        #     st.markdown(href, unsafe_allow_html=True)
