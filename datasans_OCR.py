@@ -5,7 +5,6 @@ import pytesseract
 from docx import Document
 from reportlab.pdfgen import canvas
 import tempfile
-import cv2
 
 openai.api_key = st.secrets['user_api']
 
