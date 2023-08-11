@@ -44,8 +44,9 @@ def save_file(text, output_format='docx'):
             return fp.name
 
 st.title('Datasans OCR App')
+st.write("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata telajang.")
 uploaded_file = st.file_uploader("Pilih gambar untuk OCR", type=["png", "jpg", "jpeg"])
-st.text("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata telajang.")
+
 
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
