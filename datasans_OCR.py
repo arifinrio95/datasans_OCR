@@ -33,15 +33,15 @@ def save_file(text, output_format='docx'):
     if output_format == 'docx':
         document = Document()
         document.add_paragraph(text)
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.docx') as fp:
-            document.save(fp.name)
-            return fp.name
+        fp_name = tempfile.mktemp(suffix='.docx')
+        document.save(fp_name)
+        return fp_name
     elif output_format == 'pdf':
-        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as fp:
-            c = canvas.Canvas(fp.name)
-            c.drawString(100, 750, text)
-            c.save()
-            return fp.name
+        fp_name = tempfile.mktemp(suffix='.pdf')
+        c = canvas.Canvas(fp_name)
+        c.drawString(100, 750, text)
+        c.save()
+        return fp_name
 
 st.title('Datasans OCR App')
 st.write("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata telajang.")
