@@ -5,15 +5,30 @@ import pytesseract
 from docx import Document
 from reportlab.pdfgen import canvas
 import tempfile
+import cv2
 
 openai.api_key = st.secrets['user_api']
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0MD5S4LK', use_column_width=True)
 
-def ocr_image(image):
-    # Melakukan OCR pada gambar
-    return pytesseract.image_to_string(image)
+
+
+def ocr_image(image, lang='ind', mode=pytesseract.OEM_LSTM_ONLY):
+    # Konversi gambar ke grayscale
+    grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Menerapkan thresholding untuk binarisasi
+    _, binary_image = cv2.threshold(grayscale_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+
+    # Menghilangkan noise dengan median filtering
+    denoised_image = cv2.medianBlur(binary_image, 3)
+
+    # Melakukan OCR dengan bahasa dan mode yang spesifik
+    custom_oem_psm_config = f'--oem {mode} --psm 6 -l {lang}'
+    text = pytesseract.image_to_string(denoised_image, config=custom_oem_psm_config)
+
+    return text
 
 def ocr_analyze(ocr_output):
     messages = [
