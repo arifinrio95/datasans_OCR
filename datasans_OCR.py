@@ -55,6 +55,12 @@ if uploaded_file is not None:
     # st.write("Mengklasifikasi...")
 
     if st.button('Lakukan OCR'):
+        # Tampilkan URL Saweria setelah OCR
+        st.markdown(
+            """<iframe src="https://saweria.co/widgets/qr?streamKey=0069192f5795ea2a865affcdc39e6f51" 
+                width="200" height="200" frameborder="0" scrolling="no"></iframe>""",
+            unsafe_allow_html=True,
+        )
         ocr_result = ocr_image(image)
         st.subheader("Hasil OCR:")
         # st.write(ocr_result)
