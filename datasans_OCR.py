@@ -56,10 +56,11 @@ if uploaded_file is not None:
         ocr_result = ocr_image(image)
         st.subheader("Hasil OCR:")
         # st.write(ocr_result)
-        st.write(ocr_analyze(ocr_result))
+        ocr_result_gpt = ocr_analyze(ocr_result)
+        st.write(ocr_result_gpt)
 
         format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
         if st.button('Download Hasil'):
-            output_path = save_file(ocr_result, format_option)
+            output_path = save_file(ocr_result_gpt, format_option)
             st.success(f'File siap diunduh dalam format {format_option}')
             st.download_button(label=f"Download {format_option.upper()}", file_path=output_path, file_name=f"output.{format_option}")
