@@ -15,14 +15,17 @@ st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0M
 
 
 def ocr_image(image, lang='ind', mode=pytesseract.OEM_LSTM_ONLY):
+    # Buka gambar dengan PIL
+    pil_image = Image.open(image)
+
     # Konversi gambar ke grayscale
-    grayscale_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    grayscale_image = pil_image.convert('L')
 
-    # Menerapkan thresholding untuk binarisasi
-    _, binary_image = cv2.threshold(grayscale_image, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
+    # Binerisasi dengan threshold
+    binary_image = grayscale_image.point(lambda p: 0 if p < 128 else 255, '1')
 
-    # Menghilangkan noise dengan median filtering
-    denoised_image = cv2.medianBlur(binary_image, 3)
+    # Denoising dengan median filter
+    denoised_image = binary_image.filter(ImageFilter.MedianFilter(size=3))
 
     # Melakukan OCR dengan bahasa dan mode yang spesifik
     custom_oem_psm_config = f'--oem {mode} --psm 6 -l {lang}'
