@@ -4,3 +4,4 @@ pytesseract
 pillow
 python-docx
 reportlab
+opencv-python
