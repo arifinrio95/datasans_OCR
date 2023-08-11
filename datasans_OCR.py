@@ -64,7 +64,7 @@ if uploaded_file is not None:
         #         width="200" height="200" frameborder="0" scrolling="no"></iframe>""",
         #     unsafe_allow_html=True,
         # )
-        # ocr_result = ocr_image(image)
+        ocr_result = ocr_image(image)
         st.subheader("Hasil OCR:")
         # st.write(ocr_result)
         ocr_result_gpt = ocr_analyze(ocr_result)
