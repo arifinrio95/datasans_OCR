@@ -1,9 +1,12 @@
+import openai
 import streamlit as st
 from PIL import Image
 import pytesseract
 from docx import Document
 from reportlab.pdfgen import canvas
 import tempfile
+
+openai.api_key = st.secrets['user_api']
 
 def ocr_image(image):
     # Melakukan OCR pada gambar
@@ -40,7 +43,7 @@ def save_file(text, output_format='docx'):
             c.save()
             return fp.name
 
-st.title('OCR App')
+st.title('Datasans OCR App')
 uploaded_file = st.file_uploader("Pilih gambar untuk OCR", type=["png", "jpg", "jpeg"])
 
 if uploaded_file is not None:
