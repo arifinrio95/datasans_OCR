@@ -87,8 +87,10 @@ if uploaded_file is not None:
         #     unsafe_allow_html=True,
         # )
         ocr_result = ocr_image(image)
-        st.subheader("Hasil OCR:")
-        # st.write(ocr_result)
+        st.subheader("Hasil OCR Original:")
+        st.write(ocr_result)
+        st.subheader("")
+        st.subheader("Hasil OCR Rapi:")
         ocr_result_gpt = ocr_analyze(ocr_result)
         st.write(ocr_result_gpt)
 
