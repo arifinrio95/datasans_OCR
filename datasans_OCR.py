@@ -24,7 +24,7 @@ def ocr_image(image):
     image = enhancer.enhance(2)
 
     # Terapkan threshold untuk memperjelas teks
-    image = image.point(lambda p: 0 if p < 200 else 255)
+    # image = image.point(lambda p: 0 if p < 200 else 255)
 
     # Jalankan OCR pada gambar yang sudah diolah
     text = pytesseract.image_to_string(image)
