@@ -1,6 +1,6 @@
 import openai
 import streamlit as st
-from PIL import Image
+from PIL import Image, ImageEnhance, ImageFilter
 import pytesseract
 from docx import Document
 from reportlab.pdfgen import canvas
@@ -12,23 +12,22 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0MD5S4LK', use_column_width=True)
 
 
+def ocr_image(image):
+    # Ubah ke grayscale
+    image = image.convert('L')
 
-def ocr_image(image, lang='ind', mode=pytesseract.OEM_LSTM_ONLY):
-    # Buka gambar dengan PIL
-    pil_image = Image.open(image)
+    # Terapkan filter untuk menghilangkan noise
+    image = image.filter(ImageFilter.MedianFilter())
 
-    # Konversi gambar ke grayscale
-    grayscale_image = pil_image.convert('L')
+    # Tingkatkan kontras
+    enhancer = ImageEnhance.Contrast(image)
+    image = enhancer.enhance(2)
 
-    # Binerisasi dengan threshold
-    binary_image = grayscale_image.point(lambda p: 0 if p < 128 else 255, '1')
+    # Terapkan threshold untuk memperjelas teks
+    image = image.point(lambda p: 0 if p < 200 else 255)
 
-    # Denoising dengan median filter
-    denoised_image = binary_image.filter(ImageFilter.MedianFilter(size=3))
-
-    # Melakukan OCR dengan bahasa dan mode yang spesifik
-    custom_oem_psm_config = f'--oem {mode} --psm 6 -l {lang}'
-    text = pytesseract.image_to_string(denoised_image, config=custom_oem_psm_config)
+    # Jalankan OCR pada gambar yang sudah diolah
+    text = pytesseract.image_to_string(image)
 
     return text
 
