@@ -38,9 +38,9 @@ def ocr_image(image):
 
 def ocr_analyze(ocr_output):
     messages = [
-        {"role": "system", "content": "Aku akan merapikan text kamu."},
+        {"role": "system", "content": "Aku akan menulis ulang text kamu dengan format yang baik."},
         # {"role": "user", "content": f"""Buat 2 bagian. Pertama, tuliskan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Kedua, analisa data tersebut dengan basis keilmuan yang kuat dan ilmiah, serta berikan referensinya. Output OCR:  {ocr_output}."""}
-        {"role": "user", "content": f"""Rapikan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Text OCR:  {ocr_output}."""}
+        {"role": "user", "content": f"""Rapikan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah dengan format yang baik. Text OCR:  {ocr_output}."""}
     ]
 
     response = openai.ChatCompletion.create(
