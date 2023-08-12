@@ -12,29 +12,35 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0MD5S4LK', use_column_width=True)
 
 
+# def ocr_image(image):
+#     # Ubah ke grayscale
+#     image = image.convert('L')
+
+#     # Terapkan filter untuk menghilangkan noise
+#     image = image.filter(ImageFilter.MedianFilter())
+
+#     # Tingkatkan kontras
+#     enhancer = ImageEnhance.Contrast(image)
+#     image = enhancer.enhance(2)
+
+#     # Terapkan threshold untuk memperjelas teks
+#     # image = image.point(lambda p: 0 if p < 200 else 255)
+
+#     # Jalankan OCR pada gambar yang sudah diolah
+#     text = pytesseract.image_to_string(image)
+
+#     return text
+
+
 def ocr_image(image):
-    # Ubah ke grayscale
-    image = image.convert('L')
-
-    # Terapkan filter untuk menghilangkan noise
-    image = image.filter(ImageFilter.MedianFilter())
-
-    # Tingkatkan kontras
-    enhancer = ImageEnhance.Contrast(image)
-    image = enhancer.enhance(2)
-
-    # Terapkan threshold untuk memperjelas teks
-    # image = image.point(lambda p: 0 if p < 200 else 255)
-
-    # Jalankan OCR pada gambar yang sudah diolah
-    text = pytesseract.image_to_string(image)
-
-    return text
+    # Melakukan OCR pada gambar
+    return pytesseract.image_to_string(image)
 
 def ocr_analyze(ocr_output):
     messages = [
         {"role": "system", "content": "Aku akan menganalisis data kamu."},
-        {"role": "user", "content": f"""Buat 2 bagian. Pertama, tuliskan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Kedua, analisa data tersebut dengan basis keilmuan yang kuat dan ilmiah, serta berikan referensinya. Output OCR:  {ocr_output}."""}
+        # {"role": "user", "content": f"""Buat 2 bagian. Pertama, tuliskan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Kedua, analisa data tersebut dengan basis keilmuan yang kuat dan ilmiah, serta berikan referensinya. Output OCR:  {ocr_output}."""}
+        {"role": "user", "content": f"""Rapikan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Text OCR:  {ocr_output}."""}
     ]
 
     response = openai.ChatCompletion.create(
