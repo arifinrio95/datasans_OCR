@@ -5,35 +5,25 @@ import pytesseract
 from docx import Document
 from reportlab.pdfgen import canvas
 import tempfile
-
-
-
-# Payment Done
+import requests
 
 openai.api_key = st.secrets['user_api']
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
 st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0MD5S4LK', use_column_width=True)
 
+def check_word_in_url(url, word="Berhasil"):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Akan menghasilkan exception jika terjadi kesalahan (misal: 404 error)
 
-# def ocr_image(image):
-#     # Ubah ke grayscale
-#     image = image.convert('L')
-
-#     # Terapkan filter untuk menghilangkan noise
-#     image = image.filter(ImageFilter.MedianFilter())
-
-#     # Tingkatkan kontras
-#     enhancer = ImageEnhance.Contrast(image)
-#     image = enhancer.enhance(2)
-
-#     # Terapkan threshold untuk memperjelas teks
-#     # image = image.point(lambda p: 0 if p < 200 else 255)
-
-#     # Jalankan OCR pada gambar yang sudah diolah
-#     text = pytesseract.image_to_string(image)
-
-#     return text
+        if word in response.text:
+            return True
+        else:
+            return False
+    except requests.RequestException as e:
+        print(f"Terjadi kesalahan saat mengakses URL: {e}")
+        return False
 
 
 def ocr_image(image):
@@ -77,35 +67,28 @@ st.write("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata t
 uploaded_file = st.file_uploader("Pilih gambar untuk OCR", type=["png", "jpg", "jpeg"])
 
 
+
+
+
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
-    # st.write("Mengklasifikasi...")
-    # Menampilkan di Streamlit
-    st.subheader("Sawer Seikhlasnya")
-    iframe_code = f'<iframe src="https://saweria.co/DatasansBook" width="100%" height="600"></iframe>'
-    st.components.v1.html(iframe_code, height=600)
-
-    if st.button('Lakukan OCR'):
-        
-        
-        # Tampilkan URL Saweria setelah OCR
-        # st.markdown(
-        #     """<iframe src="https://saweria.co/widgets/qr?streamKey=0069192f5795ea2a865affcdc39e6f51" 
-        #         width="200" height="200" frameborder="0" scrolling="no"></iframe>""",
-        #     unsafe_allow_html=True,
-        # )
-        ocr_result = ocr_image(image)
-        st.subheader("Hasil OCR Original:")
-        st.write(ocr_result)
-        st.subheader("")
-        st.subheader("Hasil OCR Rapi:")
-        ocr_result_gpt = ocr_analyze(ocr_result)
-        st.write(ocr_result_gpt)
-
-        format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
-        # if st.button('Download Hasil'):
-        #     output_path = save_file(ocr_result_gpt, format_option)
-        #     href = f'<a href="file://{output_path}" download>Click here to download {format_option.upper()}</a>'
-        #     st.markdown(href, unsafe_allow_html=True)
+    st.markdown(f"[Sawer seikhlasnya dengan mengeklik link ini.]({https://saweria.co/DatasansBook})")
+    url = st.text_input("Masukkan link bukti sawer berhasil untuk melanjutkan.")
+    if check_word_in_url(url):
+        st.write("Terimakasih. Silakan lanjutkan.")
+        if st.button('Lakukan OCR'):
+            ocr_result = ocr_image(image)
+            st.subheader("Hasil OCR Original:")
+            st.write(ocr_result)
+            st.subheader("")
+            st.subheader("Hasil OCR Rapi:")
+            ocr_result_gpt = ocr_analyze(ocr_result)
+            st.write(ocr_result_gpt)
+    
+            format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
+    else:
+        st.write("Pembayaran tidak terdeteksi BERHASIL.")
+    
+    
