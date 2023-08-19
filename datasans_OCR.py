@@ -7,6 +7,7 @@ from reportlab.pdfgen import canvas
 import tempfile
 import requests
 from datetime import datetime, timedelta
+import re
 
 openai.api_key = st.secrets['user_api']
 
