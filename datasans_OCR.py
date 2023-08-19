@@ -86,7 +86,7 @@ if uploaded_file is not None:
             st.write(ocr_result_gpt)
     
             format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
-    else:
-        st.write("Pembayaran tidak terdeteksi BERHASIL.")
+    # else:
+    #     st.write("Masukan link bukti sawer berhasil untuk melanjutkan.")
     
     
