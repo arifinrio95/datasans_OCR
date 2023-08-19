@@ -88,6 +88,6 @@ if uploaded_file is not None:
             ocr_result_gpt = ocr_analyze(ocr_result)
             st.write(ocr_result_gpt)
     
-            format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
+            # format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
     
     
