@@ -53,7 +53,7 @@ def check_word_in_url(url, word="Berhasil"):
         return True
 
     except requests.RequestException as e:
-        st.error(f"Terjadi kesalahan saat mengakses URL: {e}")
+        st.error("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses.")
         return False
 
 
