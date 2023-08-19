@@ -36,15 +36,15 @@ data = {
 # Header yang diperlukan
 headers = {
     "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": f"Basic {auth[0]}:"
+    "Authorization": f"Basic {auth[0]}"
 }
 
 # Alamat endpoint
 url = "https://bigflip.id/api/v2/pwf/bill"
 
 # Melakukan request POST dengan header yang diperlukan
-# response = requests.post(url, data=data, headers=headers)
-response = requests.post(url, data=data, auth=auth)
+response = requests.post(url, data=data, headers=headers)
+# response = requests.post(url, data=data, auth=auth)
 
 # Mendapatkan responsenya
 response_content = response.json()
