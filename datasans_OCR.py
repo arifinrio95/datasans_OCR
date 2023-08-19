@@ -17,7 +17,7 @@ headers = {
 }
 def check_word_in_url(url, word="Berhasil"):
     try:
-        response = requests.get(url)
+        response = requests.get(url, headers = headers)
         response.raise_for_status()
 
         # Pengecekan kata "Berhasil"
