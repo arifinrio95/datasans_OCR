@@ -75,7 +75,7 @@ if uploaded_file is not None:
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
     st.markdown(f"[Sawer seikhlasnya dengan mengeklik link ini.]({'https://saweria.co/DatasansBook'})")
-    url = st.text_input("Masukkan link bukti sawer berhasil untuk melanjutkan.")
+    url = st.text_input("Masukkan link bukti sawer untuk melanjutkan.")
    
     if check_word_in_url(url):
         with st.spinner('Wait for it...'):
