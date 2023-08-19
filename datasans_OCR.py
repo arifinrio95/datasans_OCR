@@ -21,13 +21,13 @@ def check_word_in_url(url, word="Berhasil"):
         response.raise_for_status()
 
         # Pengecekan kata "Berhasil"
-        if word in response.text:
-            return True
+        if word not in response.text:
+            return False
 
         # Pengecekan tanggal hari ini
         today_date = datetime.today().strftime('%d-%m-%Y')
-        if today_date in response.text:
-            return True
+        if today_date not in response.text:
+            return False
         
         # Pengecekan waktu saat ini sampai 1 jam ke belakang dalam format 12 jam
         current_time = datetime.now()
@@ -35,11 +35,12 @@ def check_word_in_url(url, word="Berhasil"):
         time_range = [one_hour_before + timedelta(minutes=i) for i in range(61)]
         formatted_times = [time.strftime('%I:%M') for time in time_range]
 
-        for time in formatted_times:
-            if time in response.text:
-                return True
+        # Jika tidak ada waktu yang cocok dalam konten, kembalikan False
+        if not any(time in response.text for time in formatted_times):
+            return False
 
-        return False
+        # Jika semua pengecekan berhasil, kembalikan True
+        return True
 
     except requests.RequestException as e:
         st.error(f"Terjadi kesalahan saat mengakses URL: {e}")
