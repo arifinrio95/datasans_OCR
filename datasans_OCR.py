@@ -76,16 +76,16 @@ if uploaded_file is not None:
    
     if check_word_in_url(url):
         st.write("Terimakasih. Silakan lanjutkan.")
-        if st.button('Lakukan OCR'):
-            ocr_result = ocr_image(image)
-            st.subheader("Hasil OCR Original:")
-            st.write(ocr_result)
-            st.subheader("")
-            st.subheader("Hasil OCR Rapi:")
-            ocr_result_gpt = ocr_analyze(ocr_result)
-            st.write(ocr_result_gpt)
-    
-            format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
+        # if st.button('Lakukan OCR'):
+        ocr_result = ocr_image(image)
+        st.subheader("Hasil OCR Original:")
+        st.write(ocr_result)
+        st.subheader("")
+        st.subheader("Hasil OCR Rapi:")
+        ocr_result_gpt = ocr_analyze(ocr_result)
+        st.write(ocr_result_gpt)
+
+        format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
     # else:
     #     st.write("Masukan link bukti sawer berhasil untuk melanjutkan.")
     
