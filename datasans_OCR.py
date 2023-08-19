@@ -5,63 +5,8 @@ import pytesseract
 from docx import Document
 from reportlab.pdfgen import canvas
 import tempfile
-import requests
-from datetime import datetime, timedelta
-
-# Tambahkan 15 menit ke waktu sekarang
-expired_time = datetime.now() + timedelta(minutes=15)
-
-# Endpoint URL
-url = "https://bigflip.id/api/v2/pwf/bill"
-
-# Otentikasi
-auth = (st.secrets['flip_payment'], "")
-
-# Data yang akan dikirim
-data = {
-    "title": "Kopi Angkringan",
-    "amount": "2000",
-    "type": "SINGLE",
-    # "expired_date": expired_time.strftime('%Y-%m-%d %H:%M:%S'),
-    "is_address_required": "0",
-    "is_phone_number_required": "0",
-    "sender_name": "Testing User",
-    "sender_email": "testing@gmail.com",
-    "sender_phone_number": "08111109749",
-    "sender_address": "Testing Testing Testing",
-    "sender_bank": "qris",
-    "sender_bank_type": "wallet_account"
-}
-
-# Header yang diperlukan
-headers = {
-    "Content-Type": "application/x-www-form-urlencoded",
-    "Authorization": f"Basic {auth[0]}"
-}
-
-# Alamat endpoint
-url = "https://bigflip.id/api/v2/pwf/bill"
-
-# Melakukan request POST dengan header yang diperlukan
-response = requests.post(url, data=data, headers=headers)
-# response = requests.post(url, data=data, auth=auth)
-
-# Mendapatkan responsenya
-response_content = response.json()
-
-# payment_url = response_content['payment_url']
-
-st.write(response_content)  # Cetak untuk debugging
-if 'payment_url' in response_content:
-    payment_url = response_content['payment_url']
-else:
-    st.write("Payment URL not found in the response.")
 
 
-# Menampilkan di Streamlit
-st.title("Payment URL")
-iframe_code = f'<iframe src="{payment_url}" width="100%" height="600"></iframe>'
-st.components.v1.html(iframe_code, height=600)
 
 # Payment Done
 
@@ -137,8 +82,14 @@ if uploaded_file is not None:
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
     # st.write("Mengklasifikasi...")
+    # Menampilkan di Streamlit
+    st.subheader("Sawer Seikhlasnya")
+    iframe_code = f'<iframe src="https://saweria.co/DatasansBook" width="100%" height="600"></iframe>'
+    st.components.v1.html(iframe_code, height=600)
 
     if st.button('Lakukan OCR'):
+        
+        
         # Tampilkan URL Saweria setelah OCR
         # st.markdown(
         #     """<iframe src="https://saweria.co/widgets/qr?streamKey=0069192f5795ea2a865affcdc39e6f51" 
