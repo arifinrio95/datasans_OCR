@@ -144,7 +144,7 @@ if uploaded_file is not None:
     url = st.text_input("Masukkan link bukti sawer untuk melanjutkan. Masukkan link lengkap mulai dari 'https://'")
 
     if url and check_word_in_url(url)==False:
-        st.write("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses.")
+        st.write("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses/valid.")
         
     if check_word_in_url(url):
         with st.spinner('Memproses.'):
