@@ -29,11 +29,11 @@ def check_word_in_url(url, word="Berhasil"):
         if today_date in response.text:
             return True
         
-        # Pengecekan waktu saat ini sampai 1 jam ke belakang
+        # Pengecekan waktu saat ini sampai 1 jam ke belakang dalam format 12 jam
         current_time = datetime.now()
         one_hour_before = current_time - timedelta(hours=1)
         time_range = [one_hour_before + timedelta(minutes=i) for i in range(61)]
-        formatted_times = [time.strftime('%H:%M') for time in time_range]
+        formatted_times = [time.strftime('%I:%M') for time in time_range]
 
         for time in formatted_times:
             if time in response.text:
