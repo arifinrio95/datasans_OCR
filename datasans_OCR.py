@@ -25,12 +25,12 @@ data = {
     "expired_date": expired_time.strftime('%Y-%m-%d %H:%M:%S'),
     "is_address_required": "0",
     "is_phone_number_required": "0",
-    "sender_name": "Testing User",
-    "sender_email": "testing@gmail.com",
-    "sender_phone_number": "08111109749",
-    "sender_address": "Testing Testing Testing",
-    "sender_bank": "qris",
-    "sender_bank_type": "wallet_account"
+    # "sender_name": "Testing User",
+    # "sender_email": "testing@gmail.com",
+    # "sender_phone_number": "08111109749",
+    # "sender_address": "Testing Testing Testing",
+    # "sender_bank": "qris",
+    # "sender_bank_type": "wallet_account"
 }
 
 # Header yang diperlukan
