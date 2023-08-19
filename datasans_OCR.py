@@ -102,7 +102,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
-    st.markdown(f"[Sawer minimal Rp.1000 dengan mengeklik link ini.]({'https://saweria.co/DatasansBook'})")
+    st.markdown(f"[Sawer seikhlasnya dengan mengeklik link ini.]({'https://saweria.co/DatasansBook'})")
     st.markdown("""
         <style>
         .tooltip {
@@ -138,7 +138,7 @@ if uploaded_file is not None:
         </style>
         
         <div class="tooltip">Kenapa tidak gratis? (harus nyawer)
-          <span class="tooltiptext">Proses cleansing hasil OCR menggunakan API ChatGPT yang aksesnya berbayar. Sawer minimal 1000 rupiah untuk melanjutkan. Boleh banget lebih jika ingin mensupport kami. Link berlaku selama 1 jam setelah pembayaran sukses.</span>
+          <span class="tooltiptext">Proses cleansing hasil OCR menggunakan API ChatGPT yang aksesnya berbayar. Sawer seikhlasnya untuk melanjutkan. Link berlaku selama 1 jam setelah sawer berhasil.</span>
         </div>
         """, unsafe_allow_html=True)
     url = st.text_input("Masukkan link bukti sawer untuk melanjutkan. Masukkan link lengkap mulai dari 'https://'")
