@@ -84,7 +84,7 @@ if uploaded_file is not None:
     # st.write("Mengklasifikasi...")
     # Menampilkan di Streamlit
     st.subheader("Sawer Seikhlasnya")
-    iframe_code = f'<iframe src="https://saweria.co/DatasansBook" width="100%" height="600"></iframe>'
+    iframe_code = f'<iframe src="https://www.google.co.id" width="100%" height="600"></iframe>'
     st.components.v1.html(iframe_code, height=600)
 
     if st.button('Lakukan OCR'):
