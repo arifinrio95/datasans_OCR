@@ -50,7 +50,7 @@ response_content = response.json()
 
 # payment_url = response_content['payment_url']
 
-print(response_content)  # Cetak untuk debugging
+st.write(response_content)  # Cetak untuk debugging
 if 'payment_url' in response_content:
     payment_url = response_content['payment_url']
 else:
