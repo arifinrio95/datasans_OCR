@@ -48,7 +48,14 @@ response = requests.post(url, data=data, headers=headers)
 # Mendapatkan responsenya
 response_content = response.json()
 
-payment_url = response_content['payment_url']
+# payment_url = response_content['payment_url']
+
+print(response_content)  # Cetak untuk debugging
+if 'payment_url' in response_content:
+    payment_url = response_content['payment_url']
+else:
+    st.write("Payment URL not found in the response.")
+
 
 # Menampilkan di Streamlit
 st.title("Payment URL")
