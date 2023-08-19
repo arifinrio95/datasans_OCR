@@ -15,7 +15,7 @@ expired_time = datetime.now() + timedelta(minutes=15)
 url = "https://bigflip.id/api/v2/pwf/bill"
 
 # Otentikasi
-auth = (st.secrets['flip_payment'], "")
+auth = (st.secrets['flip_payment'], ":")
 
 # Data yang akan dikirim
 data = {
