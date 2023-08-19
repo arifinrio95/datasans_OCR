@@ -108,5 +108,6 @@ if uploaded_file is not None:
             st.write(ocr_result_gpt)
     
             # format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
-    
+    if url and check_word_in_url(url)=False:
+        st.write("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses.")
     
