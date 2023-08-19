@@ -67,15 +67,13 @@ st.write("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata t
 uploaded_file = st.file_uploader("Pilih gambar untuk OCR", type=["png", "jpg", "jpeg"])
 
 
-
-
-
 if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
     st.markdown(f"[Sawer seikhlasnya dengan mengeklik link ini.]({https://saweria.co/DatasansBook})")
     url = st.text_input("Masukkan link bukti sawer berhasil untuk melanjutkan.")
+   
     if check_word_in_url(url):
         st.write("Terimakasih. Silakan lanjutkan.")
         if st.button('Lakukan OCR'):
