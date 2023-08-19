@@ -97,7 +97,7 @@ if uploaded_file is not None:
     url = st.text_input("Masukkan link bukti sawer untuk melanjutkan.")
    
     if check_word_in_url(url):
-        with st.spinner('Wait for it...'):
+        with st.spinner('Memproses.'):
             # if st.button('Lakukan OCR'):
             ocr_result = ocr_image(image)
             st.subheader("Hasil OCR Original:")
