@@ -101,8 +101,43 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
-    st.markdown(f"[Sawer seikhlasnya dengan mengeklik link ini.]({'https://saweria.co/DatasansBook'})")
-    url = st.text_input("Masukkan link bukti sawer untuk melanjutkan.")
+    st.markdown(f"[Sawer minimal Rp.1000 dengan mengeklik link ini.]({'https://saweria.co/DatasansBook'})")
+    st.markdown("""
+        <style>
+        .tooltip {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+        }
+        
+        .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 300px;
+          background-color: #555;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: absolute;
+          z-index: 1;
+          bottom: 125%; 
+          left: 50%;
+          margin-left: -150px;
+          opacity: 0;
+          transition: opacity 0.3s;
+        }
+        
+        .tooltip:hover .tooltiptext {
+          visibility: visible;
+          opacity: 1;
+        }
+        </style>
+        
+        <div class="tooltip">Kenapa tidak gratis? (harus nyawer)
+          <span class="tooltiptext">Proses cleansing hasil OCR menggunakan API ChatGPT yang aksesnya berbayar. Sawer minimal 1000 rupiah untuk melanjutkan. Boleh banget lebih jika ingin mensupport kami. Link berlaku selama 1 jam setelah pembayaran sukses.</span>
+        </div>
+        """, unsafe_allow_html=True)
+    url = st.text_input("Masukkan link bukti sawer untuk melanjutkan. Masukkan link lengkap mulai dari 'https://'")
    
     if check_word_in_url(url):
         with st.spinner('Memproses.'):
