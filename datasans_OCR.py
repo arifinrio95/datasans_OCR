@@ -6,6 +6,7 @@ from docx import Document
 from reportlab.pdfgen import canvas
 import tempfile
 import requests
+from datetime import datetime, timedelta
 
 openai.api_key = st.secrets['user_api']
 
