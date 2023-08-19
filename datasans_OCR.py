@@ -40,6 +40,14 @@ def check_word_in_url(url, word="Berhasil"):
         if not any(time in response.text for time in formatted_times):
             return False
 
+        # Pengecekan untuk string bernilai "Rp 1.000" atau lebih
+        rupiah_pattern = r'Rp\s?(\d{1,3}(\.\d{3})*|\d+)'
+        matches = re.findall(rupiah_pattern, response.text)
+        for match in matches:
+            # Menghilangkan titik dan konversi ke integer
+            value = int(match[0].replace("Rp", "").replace(".", "").strip())
+            if value < 1000:
+                return False
         # Jika semua pengecekan berhasil, kembalikan True
         return True
 
