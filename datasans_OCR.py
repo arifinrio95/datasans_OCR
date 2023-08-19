@@ -44,7 +44,7 @@ url = "https://bigflip.id/api/v2/pwf/bill"
 
 # Melakukan request POST dengan header yang diperlukan
 # response = requests.post(url, data=data, headers=headers)
-response = requests.post(url, data=data, auth=auth[0]+":")
+response = requests.post(url, data=data, auth=auth)
 
 # Mendapatkan responsenya
 response_content = response.json()
