@@ -138,7 +138,10 @@ if uploaded_file is not None:
         </div>
         """, unsafe_allow_html=True)
     url = st.text_input("Masukkan link bukti sawer untuk melanjutkan. Masukkan link lengkap mulai dari 'https://'")
-   
+
+    if url and check_word_in_url(url)==False:
+        st.write("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses.")
+        
     if check_word_in_url(url):
         with st.spinner('Memproses.'):
             # if st.button('Lakukan OCR'):
@@ -151,6 +154,5 @@ if uploaded_file is not None:
             st.write(ocr_result_gpt)
     
             # format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
-    if url and check_word_in_url(url)==False:
-        st.write("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses.")
+    
     
