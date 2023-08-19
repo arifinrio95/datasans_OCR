@@ -26,6 +26,9 @@ def check_word_in_url(url, word="Berhasil"):
         if word not in response.text:
             return False
 
+        if "@DatasansBook" not in response.text:
+            return False
+            
         # Pengecekan tanggal hari ini
         today_date = datetime.today().strftime('%d-%m-%Y')
         if today_date not in response.text:
