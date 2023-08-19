@@ -22,7 +22,7 @@ def check_word_in_url(url, word="Berhasil"):
         else:
             return False
     except requests.RequestException as e:
-        print(f"Terjadi kesalahan saat mengakses URL: {e}")
+        st.write(f"Terjadi kesalahan saat mengakses URL: {e}")
         return False
 
 
