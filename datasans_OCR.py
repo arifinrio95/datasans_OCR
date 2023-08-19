@@ -26,7 +26,7 @@ def check_word_in_url(url, word="Berhasil"):
         if word not in response.text:
             return False
 
-        if "@DatasansBook" not in response.text:
+        if "DatasansBook" not in response.text:
             return False
             
         # Pengecekan tanggal hari ini
