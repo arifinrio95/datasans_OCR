@@ -109,6 +109,9 @@ if uploaded_file is not None:
           position: relative;
           display: inline-block;
           cursor: pointer;
+          background-color: #f2f2f2; /* Warna abu-abu */
+          padding: 5px;
+          border-radius: 6px;
         }
         
         .tooltip .tooltiptext {
