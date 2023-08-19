@@ -17,15 +17,32 @@ headers = {
 }
 def check_word_in_url(url, word="Berhasil"):
     try:
-        response = requests.get(url, headers=headers)
-        response.raise_for_status()  # Akan menghasilkan exception jika terjadi kesalahan (misal: 404 error)
+        response = requests.get(url)
+        response.raise_for_status()
 
+        # Pengecekan kata "Berhasil"
         if word in response.text:
             return True
-        else:
-            return False
+
+        # Pengecekan tanggal hari ini
+        today_date = datetime.today().strftime('%d-%m-%Y')
+        if today_date in response.text:
+            return True
+        
+        # Pengecekan waktu saat ini sampai 1 jam ke belakang
+        current_time = datetime.now()
+        one_hour_before = current_time - timedelta(hours=1)
+        time_range = [one_hour_before + timedelta(minutes=i) for i in range(61)]
+        formatted_times = [time.strftime('%H:%M') for time in time_range]
+
+        for time in formatted_times:
+            if time in response.text:
+                return True
+
+        return False
+
     except requests.RequestException as e:
-        st.write(f"Terjadi kesalahan saat mengakses URL: {e}")
+        st.error(f"Terjadi kesalahan saat mengakses URL: {e}")
         return False
 
 
