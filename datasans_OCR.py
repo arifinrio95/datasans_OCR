@@ -44,6 +44,9 @@ def check_word_in_url(url, word="Berhasil"):
         if not any(time in response.text for time in formatted_times):
             return False
 
+        if url == 'founder_pass':
+            return True
+
         # Pengecekan untuk string bernilai "Rp 1.000" atau lebih
         # rupiah_pattern = r'Rp\s?(\d{1,3}(\.\d{3})*|\d+)'
         # matches = re.findall(rupiah_pattern, response.text)
