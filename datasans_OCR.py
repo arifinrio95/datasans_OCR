@@ -83,7 +83,7 @@ def ocr_analyze(ocr_output):
     ]
 
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-16k",
+        model="gpt-4",
         messages=messages,
         max_tokens=10000,
         temperature=0
