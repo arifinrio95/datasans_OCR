@@ -116,7 +116,7 @@ if uploaded_file is not None:
     image = Image.open(uploaded_file)
     st.image(image, caption='Gambar yang Diunggah.', use_column_width=True)
     st.write("")
-    st.markdown(f"[Sawer seikhlasnya dengan mengeklik link ini.]({'https://saweria.co/DatasansBook'})")
+    st.markdown(f"[Sawer dulu dengan mengeklik link ini.]({'https://lynk.id/datasans.book/s/KVnDnod'})")
     # st.markdown("""
     #     <style>
     #     .tooltip {
@@ -167,9 +167,16 @@ if uploaded_file is not None:
         st.subheader("Hasil OCR Original:")
         st.write(ocr_result)
         st.subheader("")
-        st.subheader("Hasil OCR Seteleh dirapikan secara otomatis:")
-        ocr_result_gpt = ocr_analyze(ocr_result)
-        st.write(ocr_result_gpt)
+
+    passkey = st.text_input("Masukkan passkey untuk merapikan text (powered by GPT4).")
+    
+    if passkey!=st.secrets['passkey']:
+        st.error("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses/valid.")
+    if passkey==st.secrets['passkey']:
+        with st.spinner('Memproses.')
+            st.subheader("Hasil OCR Seteleh dirapikan secara otomatis:")
+            ocr_result_gpt = ocr_analyze(ocr_result)
+            st.write(ocr_result_gpt)
     
             # format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
     
