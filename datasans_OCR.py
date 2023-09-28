@@ -85,7 +85,7 @@ def ocr_analyze(ocr_output):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=messages,
-        max_tokens=10000,
+        max_tokens=4000,
         temperature=0
     )
     script = response.choices[0].message['content']
