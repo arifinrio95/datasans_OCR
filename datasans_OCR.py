@@ -75,11 +75,11 @@ def ocr_image(image):
     # Melakukan OCR pada gambar
     return pytesseract.image_to_string(image)
 
-def ocr_analyze(ocr_output):
+def ocr_analyze(ocr_output, doc_type):
     messages = [
         {"role": "system", "content": "Aku akan menulis ulang text kamu dengan format yang baik."},
         # {"role": "user", "content": f"""Buat 2 bagian. Pertama, tuliskan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Kedua, analisa data tersebut dengan basis keilmuan yang kuat dan ilmiah, serta berikan referensinya. Output OCR:  {ocr_output}."""}
-        {"role": "user", "content": f"""Rapikan text dari hasil OCR yang berantakan ini agar terbaca dengan mudah dengan format yang rapi. Koreksi jika ada yang typo. Berikan notes di bawah dari hasil analisamu (hanya jika diperlukan). Text OCR:  {ocr_output}."""}
+        {"role": "user", "content": f"""Ini adalah hasil OCR dari dokumen {doc_type}. Rapikan text dari hasil OCR yang berantakan ini agar terbaca dengan mudah dengan format yang rapi. Koreksi jika ada yang typo. Berikan notes di bawah dari hasil analisamu (jika diperlukan). Text OCR:  {ocr_output}."""}
     ]
 
     response = openai.ChatCompletion.create(
@@ -111,6 +111,7 @@ st.title('Datasans OCR')
 st.write("OCR atau Optical Character Recognition adalah teknologi yang memungkinkan konversi berbagai jenis dokumen, seperti dokumen yang dipindai, foto dokumen, atau bahkan teks yang ada dalam gambar, menjadi data yang dapat diedit, dicari, dan disimpan oleh sebuah komputer. Proses ini melibatkan pengidentifikasian dan ekstraksi teks dari gambar untuk mengubahnya menjadi data yang bisa dimanipulasi. Teknologi OCR bisa digunakan dalam aplikasi pengelolaan dokumen dan otomatisasi tugas.")
 st.write("Pastikan foto/gambar yang diupload tidak blur dan terbaca dengan jelas dengan mata telajang.")
 uploaded_file = st.file_uploader("Pilih gambar untuk OCR", type=["png", "jpg", "jpeg"])
+
 
 
 if uploaded_file is not None:
@@ -176,10 +177,12 @@ if uploaded_file is not None:
     if passkey != '' and passkey!=st.secrets['passkey']:
         st.error("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses/valid.")
     if passkey==st.secrets['passkey']:
-        with st.spinner('Memproses.'):
-            
-            ocr_result_gpt = ocr_analyze(ocr_result)
-            st.write(ocr_result_gpt)
+        doc_type = st.text_input("Dokumen apa ini? (Informasi ini diperlukan agar saya lebih memahami konteks.)")
+        if doc_type:
+            with st.spinner('Memproses.'):
+                
+                ocr_result_gpt = ocr_analyze(ocr_result, doc_type)
+                st.write(ocr_result_gpt)
     
             # format_option = st.selectbox('Pilih format file keluaran:', ['docx', 'pdf'])
     
