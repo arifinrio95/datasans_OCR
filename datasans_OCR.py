@@ -108,7 +108,8 @@ def save_file(text, output_format='docx'):
     return file_path
 
 st.title('Datasans OCR App')
-st.write("Pastikan foto/gambar tidak blur dan terbaca dengan jelas dengan mata telajang.")
+st.write("OCR atau Optical Character Recognition adalah teknologi yang memungkinkan konversi berbagai jenis dokumen, seperti dokumen yang dipindai, foto dokumen, atau bahkan teks yang ada dalam gambar, menjadi data yang dapat diedit, dicari, dan disimpan oleh sebuah komputer. Proses ini melibatkan pengidentifikasian dan ekstraksi teks dari gambar untuk mengubahnya menjadi data yang bisa dimanipulasi. Teknologi OCR bisa digunakan dalam aplikasi pengelolaan dokumen dan otomatisasi tugas.")
+st.write("Pastikan foto/gambar yang diupload tidak blur dan terbaca dengan jelas dengan mata telajang.")
 uploaded_file = st.file_uploader("Pilih gambar untuk OCR", type=["png", "jpg", "jpeg"])
 
 
