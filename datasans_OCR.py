@@ -173,7 +173,7 @@ if uploaded_file is not None:
     if passkey!=st.secrets['passkey']:
         st.error("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses/valid.")
     if passkey==st.secrets['passkey']:
-        with st.spinner('Memproses.')
+        with st.spinner('Memproses.'):
             st.subheader("Hasil OCR Seteleh dirapikan secara otomatis:")
             ocr_result_gpt = ocr_analyze(ocr_result)
             st.write(ocr_result_gpt)
