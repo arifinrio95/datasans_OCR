@@ -20,7 +20,7 @@ local_css("style.css")
 openai.api_key = st.secrets['user_api']
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
-st.image('https://drive.google.com/uc?export=view&id=1dWu3kImQ11Q-M2JgLtVz9Dng0MD5S4LK', use_column_width=True)
+st.image('https://drive.google.com/uc?export=view&id=19pbADOQ5KjjzcB_Em8qqqe8YG_tYDRTs', use_column_width=True)
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
