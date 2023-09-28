@@ -9,6 +9,14 @@ import requests
 from datetime import datetime, timedelta
 import re
 
+# Use local CSS
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+local_css("style.css")
+
 openai.api_key = st.secrets['user_api']
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
