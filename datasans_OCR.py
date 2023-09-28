@@ -170,7 +170,7 @@ if uploaded_file is not None:
 
     passkey = st.text_input("Masukkan passkey untuk merapikan text (powered by GPT4).")
     
-    if passkey!=st.secrets['passkey']:
+    if passkey != '' and passkey!=st.secrets['passkey']:
         st.error("Maaf link bukti pembayaran salah atau status pembayaran tidak sukses/valid.")
     if passkey==st.secrets['passkey']:
         with st.spinner('Memproses.'):
