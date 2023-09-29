@@ -80,8 +80,8 @@ def ocr_analyze(ocr_output, doc_type):
         {"role": "system", "content": "Aku akan menulis ulang text kamu dengan format yang baik."},
         # {"role": "user", "content": f"""Buat 2 bagian. Pertama, tuliskan text dari hasil OCR saya yang berantakan agar terbaca dengan mudah. Kedua, analisa data tersebut dengan basis keilmuan yang kuat dan ilmiah, serta berikan referensinya. Output OCR:  {ocr_output}."""}
         # {"role": "user", "content": f"""Ini adalah hasil OCR dari dokumen {doc_type}. Rapikan text dari hasil OCR yang berantakan ini agar terbaca dengan mudah dengan format yang rapi. Koreksi jika ada yang typo. Lalu berikan hasil analisamu sebagai notes. Text OCR:  {ocr_output}."""}
-        {"role": "user", "content": f"""Ini adalah hasil OCR dari dokumen {doc_type}. Rapikan text-nya, lalu berikan analisamu sebagai 'Notes dari SansGPT'. Text OCR:  {ocr_output}."""}
-    ]
+        {"role": "user", "content": f"""Ini adalah hasil OCR dari dokumen {doc_type}. Rapikan text-nya dengan asumsi textnya berada dalam st.write, tidak usah ditulis lagi st.write nya karena nanti responmu akan saya running di dalam st.write secara manual. Berikan juga analisamu sebagai 'Notes dari SansGPT'. Text OCR:  {ocr_output}."""}
+    
 
     response = openai.ChatCompletion.create(
         model="gpt-4",
